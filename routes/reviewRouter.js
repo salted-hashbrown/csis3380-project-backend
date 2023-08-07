@@ -55,65 +55,33 @@ router.route("/add").post((req, res) => {
 });
 
 // ---------------------------------------------------------
-// Login : Get object
+// Get Review by movie Id
 // ---------------------------------------------------------
-router.route("/login").get((req, res) => {
+router.route("/getreview").get((req, res) => {
     const userId = req.body.userId;
-    const password = req.body.password;
-   
-    console.log("*** Login: " + userId);
+    const tmdbId = req.body.tmdbId;
+    let body = "";
+    let rating = "";
+     
+    console.log("*** Get Review: " + userId + ", tmdbId: " + tmdbId);
   
     // Check object
-    objModel.find({ userId: userId }, (err, users) => {
+    objModel.find({ userId: userId, tmdbId: tmdbId }, (err, objs) => {
       if (err) {
           console.error('Error finding info:', err);
           return res.status(400).json({ error: 'Error' });
       } 
       else {
-          if(users.length > 0){
-            const authenticated = bcryptjs.compareSync(password, users[0].password);
-            if (authenticated){
-                return res.status(200).json(users);
-            }
-            else{
-                return res.status(400).json({error: 'password error'});
-            }
+          if(objs.length > 0){
+              return res.status(200).json(objs);
           }
           else{
-              return res.status(400).json({ error: 'User not found' });
+              return res.status(400).json({ error: 'Data not found' });
           }
       }
     });
   
 });
 
-// ---------------------------------------------------------
-// Update object
-// ---------------------------------------------------------
-router.route("/update").post((req, res) => {
-    const userId = req.body.userId;
-    const password = req.body.password;
-   
-    console.log("*** Update: " + userId);
-  
-    // Check object
-    objModel.findOne({ userId: userId }, (err, obj) => {
-      if (err) {
-          console.error('Error finding info:', err);
-          return res.status(400).json({ error: 'Error' });
-      } 
-      else {
-          if(obj != null && obj.userId.length > 0){
-
-                obj.password = bcryptjs.hashSync(password,10);
-                obj.save();
-                return res.status(200).json(obj);
-          }
-          else{
-              return res.status(400).json({ error: 'User not found' });
-          }
-      }
-    });
-});
 
 module.exports = router;
