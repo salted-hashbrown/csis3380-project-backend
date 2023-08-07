@@ -55,18 +55,40 @@ router.route("/add").post((req, res) => {
 });
 
 // ---------------------------------------------------------
-// Get Review by movie Id
+// Get Review by user Id
 // ---------------------------------------------------------
-router.route("/getreview").get((req, res) => {
+router.route("/getreviewbyuserid").get((req, res) => {
     const userId = req.body.userId;
-    const tmdbId = req.body.tmdbId;
-    let body = "";
-    let rating = "";
      
-    console.log("*** Get Review: " + userId + ", tmdbId: " + tmdbId);
+    console.log("*** Get Review: " + userId);
   
     // Check object
-    objModel.find({ userId: userId, tmdbId: tmdbId }, (err, objs) => {
+    objModel.find({ userId: userId}, (err, objs) => {
+      if (err) {
+          console.error('Error finding info:', err);
+          return res.status(400).json({ error: 'Error' });
+      } 
+      else {
+          if(objs.length > 0){
+              return res.status(200).json(objs);
+          }
+          else{
+              return res.status(400).json({ error: 'Data not found' });
+          }
+      }
+    });
+  
+});
+// ---------------------------------------------------------
+// Get Review by movie Id
+// ---------------------------------------------------------
+router.route("/getreviewbymovieid").get((req, res) => {
+    const tmdbId = req.body.tmdbId;
+     
+    console.log("*** Get Review: tmdbId: " + tmdbId);
+  
+    // Check object
+    objModel.find({tmdbId: tmdbId }, (err, objs) => {
       if (err) {
           console.error('Error finding info:', err);
           return res.status(400).json({ error: 'Error' });
