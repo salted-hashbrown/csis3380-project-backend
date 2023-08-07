@@ -5,19 +5,19 @@ const Schema = mongoose.Schema;
 
 const todoSchema = new mongoose.Schema({
     adult: { type: Boolean, required: true },
-    backdrop_path: { type: String, required: true },
-    genre_ids: { type: [Number], required: true },
+    backdrop_path: { type: String, required: false },
+    genre_ids: { type: [Number], required: false },
     id: { type: Number, required: true },
-    original_language: { type: String, required: true },
-    original_title: { type: String, required: true },
-    overview: { type: String, required: true },
-    popularity: { type: Number, required: true },
-    poster_path: { type: String, required: true },
-    release_date: { type: String, required: true },
-    title: { type: String, required: true },
-    video: { type: Boolean, required: true },
-    vote_average: { type: Number, required: true },
-    vote_count: { type: Number, required: true },
+    original_language: { type: String, required: false },
+    original_title: { type: String, required: false },
+    overview: { type: String, required: false },
+    popularity: { type: Number, required: false },
+    poster_path: { type: String, required: false },
+    release_date: { type: String, required: false },
+    title: { type: String, required: false },
+    video: { type: Boolean, required: false },
+    vote_average: { type: Number, required: false },
+    vote_count: { type: Number, required: false },
   });
 
 const Movie = mongoose.model("movie", todoSchema);

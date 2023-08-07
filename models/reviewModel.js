@@ -7,7 +7,7 @@ const Schema = mongoose.Schema;
 const todoSchema = new Schema({
   userId: { type: String, required: true },
   tmdbId: { type: String, required: true },
-  body: { type: String, required: true },
+  reviewBody: { type: String, required: true },
   rating: { type: Number, required: true },
   createdDate: { type: Date, default: Date.now }
 });
