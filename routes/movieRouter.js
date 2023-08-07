@@ -66,32 +66,5 @@ router.route("/getall").get((req, res) => {
   
 });
 
-// ---------------------------------------------------------
-// Add object
-// ---------------------------------------------------------
-router.route("/add").post((req, res) => {
-  const userId = req.body.userId;
-  const tmdbId = req.body.tmdbId;
-  const body = req.body.body;
-  const rating = req.body.rating;
-
-  // create a new object 
-  const newObj = new objModel({
-    userId,
-    tmdbId,
-    body,
-    rating
-  });
-
-  console.log("*** Add review: " + userId + ", tmdbID:" + tmdbId);
-
-    // save the new object
-    newObj
-    .save()
-    .then((savedObj) => res.json(savedObj))
-    .catch((err) => res.status(400).json("Error: " + err));
-
-});
-
 
 module.exports = router;
