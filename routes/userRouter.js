@@ -73,11 +73,11 @@ router.route("/add").post((req, res) => {
 // ---------------------------------------------------------
 // Login : Get object
 // ---------------------------------------------------------
-router.route("/login").get((req, res) => {
+router.route("/login").post((req, res) => {
     const userId = req.body.userId;
     const password = req.body.password;
    
-    console.log("*** Login: " + userId);
+    console.log("*** Login: " + userId + "," + password);
   
     // Check object
     objModel.find({ userId: userId }, (err, users) => {
