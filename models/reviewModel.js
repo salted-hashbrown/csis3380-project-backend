@@ -4,13 +4,15 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 // Create a Schema object
-const todoSchema = new Schema({
+const reviewSchema = new Schema({
   userId: { type: String, required: true },
   tmdbId: { type: String, required: true },
   reviewBody: { type: String, required: true },
   rating: { type: Number, required: true },
-  createdDate: { type: Date, default: Date.now }
+  createdDate: { type: Date, default: Date.now },
+  upvotes: { type: [String] }, default: [], // Array of user IDs who upvoted
+  downvotes: { type: [String], default: [] } // Array of user IDs who downvoted
 });
 
-const Review = mongoose.model("review", todoSchema);
+const Review = mongoose.model("review", reviewSchema);
 module.exports = Review;

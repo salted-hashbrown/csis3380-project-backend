@@ -11,12 +11,12 @@ app.use(cors());
 app.use(express.json());
 
 const mongoURI = process.env.mongoURI;
-mongoose.connect(mongoURI, { useNewUrlParser: true, useCreateIndex: true,  useUnifiedTopology: true   }
+mongoose.connect(mongoURI, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }
 );
 const connection = mongoose.connection;
 connection.once('open', () => {
   console.log("MongoDB database connection established successfully");
-})
+});
 
 
 // import routes
@@ -30,5 +30,7 @@ app.use('/review', reviewRouter);
 app.use('/movie', movieRouter);
 
 app.listen(port, () => {
-    console.log(`Server is running on port: ${port}`);
+  console.log(`Server is running on port: ${port}`);
 });
+
+//test
